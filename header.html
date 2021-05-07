@@ -1,214 +1,277 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>HEADER</title>
-        <style>
-            * {
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-            }
 
-            body {
-                font-family: sans-serif;
-            }
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HEADER</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-            .container {
-                max-width: 1200px;
-                width: 100%;
-                padding: 0 15px;
-                margin: 0 auto;
-            }
+        body {
+            font-family: sans-serif;
+            height: 100%;
+            min-height: 100vh;
+        }
 
-            a {
-                text-decoration: none;
-            }
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            padding: 0 15px;
+            margin: 0 auto;
+        }
 
-            button{
-                background-color: transparent;
-                outline: none;
-                border: navajowhite;
-            }
+        a {
+            text-decoration: none;
+        }
+        a,picture{
+            display: block;
+        }
+        button {
+            background-color: transparent;
+            outline: none;
+            border: navajowhite;
+        }
 
-            ul {
-                list-style: none;
-            }
+        ul {
+            list-style: none;
+        }
 
-            .header {
-                padding: 18px 0;
-                position: fixed;
+        .header {
+            padding: 20px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 9;
+            background-color: #FFFFFF;
+            box-shadow: 0 0 10px #ddd;
+        }
+
+        .header__inner,
+        .nav__list,
+        .nav__bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav__item {
+            margin-right: 30px;
+        }
+
+        .nav__link {
+            font-size: 18px;
+            color: #8C8B92;
+            position: relative;
+            transition: 0.3s;
+            display: block;
+        }
+
+        .nav__link:hover,
+        .nav__link.active {
+            color: #1F1A40;
+        }
+
+        .nav__link.active {
+            font-weight: 600;
+        }
+
+        .nav__link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -33px;
+            height: 4px;
+            width: 100%;
+            background-color: #42B7E2;
+            transform: scale(0);
+            transition: 0.3s;
+        }
+
+        .nav__link.active::after,
+        .nav__link:hover::after {
+            transform: scale(1);
+        }
+
+        .nav__btn {
+            background: #42B7E2;
+            border-radius: 2px;
+            padding: 15px 20px;
+            color: #FFFFFF;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .nav__toggle {
+            display: none;
+        }
+
+        @media only screen and (max-width: 990px) {
+            .body-cover{
+                position: relative;
+                overflow: hidden;
+            }
+            body::after{
+                content: "";
+                position: absolute;
                 top: 0;
                 left: 0;
+                height: 100%;
                 width: 100%;
-                z-index: 9;
-                background-color: #FFFFFF;
-                box-shadow: 0 0 10px #ddd;
+                background-color: rgba(0,0,0,0.7);
+                opacity: 0;
+                transition: 0.4s;
+            }
+            body.body-cover::after{
+                opacity: 1;
+            }
+            .nav__toggle {
+                display: block;
+                position: relative;
             }
 
-            .header__inner,
-            .nav__list,
-            .nav__bar {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
+            .nav__toggle,
+            .nav__toggle::after,
+            .nav__toggle::before {
+                height: 3px;
+                width: 30px;
+                border-radius: 10px;
+                border: 0;
+                top: 0;
+                left: 0;
+                transition: 0.5s;
+                background-color: #302D3A;
+            }
+
+            .nav__toggle::after,
+            .nav__toggle::before {
+                content: "";
+                position: absolute;
+                transform-origin: center;
+            }
+            .nav__toggle::after{
+                top: -7px;
+            }
+            .nav__toggle::before {
+                top: 7px;
+            } 
+            .header.active .nav__toggle::after {
+                transform: rotate(45deg);
+                top: 0;
+            }
+            .header.active .nav__toggle::before {
+                top: 0;
+                transform: rotate(-45deg);
+            } 
+            .header.active .nav__toggle{
+                background-color: transparent;
             }
 
             .nav__item {
-                margin-right: 57px;
+                margin: 0;
+                width: 100%;
             }
 
-            .nav__item:last-child {
-                margin-right: 45px;
+            .nav__list,
+            .nav__bar {
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: initial;
+
             }
 
-            .nav__link {
-                font-size: 18px;
-                color: #8C8B92;
-                position: relative;
-                transition: 0.3s;
-                display: block;
+            .nav__bar {
+                position: fixed;
+                right: -100%;
+                padding: 20px;
+                background: #FFFFFF;
+                box-shadow: 0 0 10px #ddd;
+                height: 100%;
+                overflow: scroll;
+                z-index: 9;
+                transition: 0.5s;
             }
 
-            .nav__link:hover,
-            .nav__link.active {
-                color: #1F1A40;
-            }
-
-            .nav__link.active {
-                font-weight: 600;
+            .header.active .nav__bar {
+                right: 0;
             }
 
             .nav__link::after {
-                content: "";
-                position: absolute;
-                left: 0;
-                bottom: -33px;
-                height: 4px;
-                width: 100%;
-                background-color: #42B7E2;
-                transform: scale(0);
-                transition: 0.3s;
+                bottom: -12px;
             }
 
-            .nav__link.active::after,
-            .nav__link:hover::after {
-                transform: scale(1);
+            .nav__link,
+            .nav__link:last-child {
+                margin: 0 0 25px 0;
             }
-
-            .nav__btn {
-                background: #42B7E2;
-                border-radius: 2px;
-                padding: 15px 20px;
-                color: #FFFFFF;
-                font-size: 18px;
-                font-weight: bold;
-            }
-
-            .nav__toggle {
-                display: none;
-            }
-
-            @media only screen and (max-width: 990px) {
-                .nav__toggle {
-                    display: block;
-                }
-
-                .nav__item {
-                    margin: 0;
-                    width: 100%;
-                }
-
-                .nav__list,
-                .nav__bar {
-                    flex-direction: column;
-                    align-items: flex-start;
-                    justify-content: initial;
-
-                }
-
-                .nav__bar {
-                    position: fixed;
-                    right: -100%;
-                    padding: 20px;
-                    background: #FFFFFF;
-                    box-shadow: 0 0 10px #ddd;
-                    height: 100%;
-                    overflow: scroll;
-                    z-index: 9;
-                    transition: 0.5s;
-                }
-
-                .nav__bar.active {
-                    right: 0;
-                }
-
-                .nav__link::after {
-                    bottom: -12px;
-                }
-
-                .nav__link,
-                .nav__link:last-child {
-                    margin: 0 0 25px 0;
-                }
-            }
-        </style>
-        <script>
-            "use strict";
-            window.addEventListener('DOMContentLoaded', function () {
-                //  ======= header Start =======
-                const header = document.querySelector('.header');
-                const body = document.querySelector("body");
-                const navToggle = document.querySelector('.nav__toggle');
-                const nav = document.querySelector('.nav__bar ');
-                navToggle.addEventListener('click', () => { nav.classList.toggle("active"); });
+        }
+    </style>
+    <script>
+        "use strict";
+        window.addEventListener('DOMContentLoaded', function () {
+            //  ======= header Start =======
+            if( window.innerWidth <= 991){
+                let header = document.querySelector('header');
+                let body = document.querySelector("body");
+                let navToggle = document.querySelector('.nav__toggle');
+                let nav = document.querySelector('.nav__bar ');
+                console.log(header.scrollHeight)
+                console.log(header.offsetHeight)
+                document.addEventListener('click', (e) => { 
+                    if(e.target == navToggle){
+                        header.classList.toggle("active"); 
+                        body.classList.toggle("body-cover"); 
+                    }
+                    else if(e.target == nav){
+                        // do nothing
+                    }
+                    else{
+                        header.classList.remove("active"); 
+                        body.classList.remove("body-cover"); 
+                    }
+                });
                 body.setAttribute("style", `padding-top:${header.offsetHeight}px`);
-                nav.setAttribute("style", `top:${header.offsetHeight}px`);
-                //  ******* header End *******
-            });
-        </script>
-    </head>
+                nav.setAttribute("style", `top:${header.offsetHeight}px; padding-bottom: ${header.offsetHeight + 25}px;`);
+            }
+            //  ******* header End *******
+        });
+    </script>
+</head>
 
-    <body>
-        <!-- ======= header Start ======= -->
-        <header class="header">
-            <div class="container">
-                <div class="header__inner">
-                    <div class="logo"><a href="index.html">
-                            <picture>
-                                <source srcset="http://themadbrains.com/assets/webp/logo.webp" type="image/webp" />
-                                <img src="http://themadbrains.com/assets/img/logo.png" alt="LOGO" />
-                            </picture>
-                        </a></div>
-                    <nav class="nav__bar">
-                        <ul class="nav__list">
-                            <li class="nav__item"> <a class="nav__link active" href="#">Home</a></li>
-                            <li class="nav__item"> <a class="nav__link" href="#">Example</a></li>
-                            <li class="nav__item"> <a class="nav__link" href="#">Example</a></li>
-                            <li class="nav__item"> <a class="nav__link" href="#">Example</a></li>
-                            <li class="nav__item"> <a class="nav__link" href="#">Example us</a></li>
-                        </ul>
-                        <a class="nav__btn" href="+123456789">+123456789</a>
-                    </nav>
-                    <button class="nav__toggle">
-                        <svg class="nav__toggle__svg" height="20px" width=" 20px" viewbox="0 -53 384 384"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="m368 154.667969h-352c-8.832031 0-16-7.167969-16-16s7.167969-16 16-16h352c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16zm0 0">
-                            </path>
-                            <path
-                                d="m368 32h-352c-8.832031 0-16-7.167969-16-16s7.167969-16 16-16h352c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16zm0 0">
-                            </path>
-                            <path
-                                d="m368 277.332031h-352c-8.832031 0-16-7.167969-16-16s7.167969-16 16-16h352c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16zm0 0">
-                            </path>
-                        </svg>
-                    </button>
-                </div>
+<body>
+    <!-- ======= header Start ======= -->
+    <header class="header">
+        <div class="container">
+            <div class="header__inner">
+                <div class="logo"><a href="index.html">
+                        <picture>
+                            <source srcset="http://themadbrains.com/assets/webp/logo.webp" type="image/webp" />
+                            <img src="http://themadbrains.com/assets/img/logo.png" alt="LOGO" />
+                        </picture>
+                    </a></div>
+                <nav class="nav__bar">
+                    <ul class="nav__list">
+                        <li class="nav__item"> <a class="nav__link active" href="#">Home</a></li>
+                        <li class="nav__item"> <a class="nav__link" href="#">Example</a></li>
+                        <li class="nav__item"> <a class="nav__link" href="#">Example</a></li>
+                        <li class="nav__item"> <a class="nav__link" href="#">Example</a></li>
+                        <li class="nav__item"> <a class="nav__link" href="#">Example us</a></li>
+                    </ul>
+                    <a class="nav__btn" href="#">
+                        Contact US
+                    </a>
+                </nav>
+                <button class="nav__toggle"></button>
             </div>
-        </header>
-        <!-- ******* header End ******* -->
-    </body>
+        </div>
+    </header>
+    <!-- ******* header End ******* -->
+</body>
+
 </html>
